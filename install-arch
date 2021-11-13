@@ -1,0 +1,132 @@
+In case of empty disk:
+{
+get disk: fdisk -l
+edit disk: fdisk /dev/sdx
+new partition table: g (for gpt)
+
+EFI partition:
+  new partition: n
+  size: +512M
+
+boot partition:
+  new partition: n
+  size: +XG
+
+home partiton:
+  new part: n
+
+write changes: w
+}
+
+next:
+
+Format partitions:
+  mkfs.btrfs -L root /dev/sdx2
+  mkfs.fat -F32 -L EFI /dev/sdx1
+  mkfs.ext4 -L home /dev/sdx3
+
+Create subvolume for btrfs:
+  mount /dev/sdx2 /mnt
+  btrfs subvolume create /mnt/@
+  umount -R /mnt
+
+Mount partitions:
+  mount /dev/sdx2 -o subvol=@ /mnt
+  mkdir -p /mnt/boot/EFI (create EFI folder for mounting)
+  mkdir /mnt/home (create home folder for mounting)
+  mount /dev/sdx1 /mnt/boot/EFI
+  mount /dev/sdx3 /mnt/home
+
+Update mirrorlist:
+  reflector \
+    --country France,Germany \
+    --protocol https \
+    --latest 20 \
+    --save /etc/pacman.d/mirrorlist
+
+Enable parallel download and color for pacman:
+  edit /etc/pacman.conf and uncomment both "Color" and "Parallel Downloads"
+
+Install base packages:
+  pacstrap /mnt base linux linux-firmware btrfs-progs dosfstools e2fsprogs nano gvim intel-ucode wget
+
+Generate fstab:
+  genfstab -U /mnt >> /mnt/etc/fstab
+
+Change root:
+  arch-chroot /mnt
+
+Change Timezone:
+  ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+  hwclock --systohc
+
+Edit localization:
+  vim /etc/locale.gen (uncomment en_US.UTF-8 and fr_FR.UTF-8)
+  locale-gen
+  echo "LANG=fr_FR.UTF-8" > /etc/locale.conf
+  echo "KEYMAP=fr-latin1" > /etc/vconsole.conf
+
+Change hostname:
+  echo "arch" > /etc/hostname
+
+Edit hosts:
+  echo "127.0.0.1        localhost" >> /etc/hosts
+  echo "::1              localhost" >> /etc/hosts
+
+Change root password:
+  passwd
+
+Enable parallel download and color for pacman:
+  edit /etc/pacman.conf and uncomment both "Color" and "Parallel Downloads"
+
+Install other packages:
+  pacman -S grub efibootmgr networkmanager network-manager-applet \
+    wireless_tools wpa_suplicant dialog os-prober mtools base-devel \
+    linux-headers
+
+Install grub:
+  grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=GRUB
+  grub-mkconfig -o /boot/grub/grub.cfg
+
+Leave root:
+  exit
+  umount -R /mnt
+  reboot
+
+Start network manager:
+  systemctl enable --now NetworkManager
+
+Create user:
+  useradd -m -G wheel polynux
+  passwd polynux
+
+Edit sudo permissions:
+  EDITOR=vim visudo (uncomment %wheel)
+
+Install Xorg:
+  pacman -S xorg
+
+Install AUR helper:
+  su polynux
+  cd /home/polynux
+  mkdir .srcs
+  git clone https://aur.archlinux.org/yay.git .srcs/yay
+  cd .srcs/yay && makepkg -si
+  exit
+
+Install display manager:
+  pacman -S sddm
+  systemctl enable sddm
+
+Install window manager:
+  pacman -S xmonad xmonad-contrib xmobar dmenu picom nitrogen firefox chromium
+
+Set xprofile:
+  echo "setxkbmap fr & \
+    nitrogen --restore & \
+    picom -f &" > .xprofile
+
+Disable vsync;
+  vim /etc/xdg/picom.conf (comment vsync)
+
+
