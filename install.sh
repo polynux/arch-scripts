@@ -140,13 +140,14 @@ echo "Enter root password:"
 passwd
 
 read -p "Please enter username:" username
+echo "username=$username" >> ${HOME}/arch-scripts/install.conf
 if [ $(whoami) = "root" ];then
     useradd -m -G wheel,libvirt -s /bin/bash $username 
     echo "Enter ${username} password:"
 	passwd $username
-	cp -R /root/ArchTitus /home/$username/
-    chown -R $username: /home/$username/ArchTitus
-	read -p "Please name your machine:" nameofmachine
+	cp -R /root/arch-scripts /home/$username/
+    chown -R $username: /home/$username/arch-scripts
+	read -p "Please name your machine name:" nameofmachine
 	echo $nameofmachine > /etc/hostname
 else
 	echo "You are already a user proceed with aur installs"
