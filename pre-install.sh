@@ -107,8 +107,16 @@ if ! grep -qs '/mnt' /proc/mounts; then
     reboot now
 fi
 
+echo "--------------------------------------"
+echo "--   Arch Install on Main Drive     --"
+echo "--------------------------------------"
 
+timedatectl set-ntp true
+sed -i 's/^#Para/Para/' /etc/pacman.conf # enable parallels download
 
+# Install base
+pacstrap /mnt base base-devel linux linux-firmware gvim nano sudo archlinux-keyring wget btrfsprogs e2fsprogs dosfstools --noconfirm --needed
+genfstab -U /mnt >> /mnt/etc/fstab
 
 ;;
 esac
