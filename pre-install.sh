@@ -74,7 +74,7 @@ sgdisk -n 2::$SIZE --typecode=2:8304 --change-name=2:"root" $DISK # root partiti
 sgdisk -n 3::-0 --typecode=3:8302 --change-name=3:"home" $DISK # home partition
 
 # Format home partition
-mkfs.ext4 -L "home" "${DISK}3"
+mkfs.ext4 -n "home" "${DISK}3"
 ;;
 
 y|yes|YES|Yes|Y)
@@ -84,8 +84,8 @@ echo "Keeping you ${DISK}3 home partition"
 esac
 
 # Format EFI and root partition
-mkfs.fat -F32 -L "EFI" "${DISK}1"
-mkfs.btrfs -L "root" "${DISK}2" -f
+mkfs.fat -F32 -n "EFI" "${DISK}1"
+mkfs.btrfs -n "root" "${DISK}2" -f
 
 # Create subvolume for root partition
 mount -t btrfs "${DISK}2" /mnt
