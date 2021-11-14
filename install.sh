@@ -142,11 +142,11 @@ passwd
 read -p "Please enter username:" username
 echo "username=$username" >> ${HOME}/arch-scripts/install.conf
 if [ $(whoami) = "root" ];then
-    useradd -m -G wheel,libvirt -s /bin/bash $username 
+    useradd -m -G wheel -s /bin/bash $username 
     echo "Enter ${username} password:"
 	passwd $username
 	cp -R /root/arch-scripts /home/$username/
-    chown -R $username: /home/$username/arch-scripts
+    chown -R $username /home/$username/arch-scripts
 	read -p "Please name your machine name:" nameofmachine
 	echo $nameofmachine > /etc/hostname
 else
