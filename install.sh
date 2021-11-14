@@ -130,7 +130,7 @@ fi
 
 # detect virtualbox
 pacman -S dmidecode --noconfirm
-if [[$(dmidecode -t system | grep 'Product Name') =~ "VirtualBox" ]]; then
+if [[ $(dmidecode -t system | grep 'Product Name') =~ "VirtualBox" ]]; then
 pacman -S virtualbox-guest-utils --noconfirm
 fi
 
