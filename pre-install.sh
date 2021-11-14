@@ -85,7 +85,7 @@ esac
 
 # Format EFI and root partition
 mkfs.fat -F32 -L "EFI" "${DISK}1"
-mkfs.btrfs -L "root" "${DISK}2"
+mkfs.btrfs -L "root" "${DISK}2" -f
 
 # Create subvolume for root partition
 mount -t btrfs "${DISK}2" /mnt
