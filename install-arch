@@ -129,4 +129,5 @@ Set xprofile:
 Disable vsync;
   vim /etc/xdg/picom.conf (comment vsync)
 
-
+Configure sddm:
+  vim /etc/sddm.conf (User=polynux Session=xmonad.desktop Numlock=on)
