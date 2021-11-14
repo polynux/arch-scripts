@@ -118,5 +118,7 @@ sed -i 's/^#Para/Para/' /etc/pacman.conf # enable parallels download
 pacstrap /mnt base base-devel linux linux-firmware gvim nano sudo archlinux-keyring wget btrfsprogs e2fsprogs dosfstools --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
 
+cp -R $(pwd) /mnt/root/
+
 ;;
 esac
