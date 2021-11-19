@@ -52,9 +52,6 @@ if [[ ${DISK} =~ "nvme" ]]; then
 DISK="${DISK}p"
 fi
 
-echo "What size of your root partition do you want? (ex: 10G)"
-read SIZE
-
 echo "--------------------------------------"
 echo -e "       Formatting disk..."
 echo "--------------------------------------"
@@ -63,6 +60,9 @@ echo "Would you want to use existing home partition ? (Y/N)"
 read homepart
 case $homepart in
 n|N|No|NO|no)
+
+echo "What size of your root partition do you want? (ex: 10G)"
+read SIZE
 
 # prep disk
 sgdisk -Z $DISK # erase partition table
@@ -85,7 +85,7 @@ esac
 
 # Format EFI and root partition
 mkfs.fat -F32 -n "EFI" "${DISK}1"
-mkfs.btrfs -n "root" "${DISK}2" -f
+mkfs.btrfs -L "root" "${DISK}2" -f
 
 # Create subvolume for root partition
 mount -t btrfs "${DISK}2" /mnt
