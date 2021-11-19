@@ -70,14 +70,10 @@ PKGS=(
 "os-prober"
 "mtools"
 "linux-headers"
-"lightdm"
-"lightdm-webkit2-greeter"
-"lightdm-webkit-theme-litarvan"
-"xmonad"
-"xmonad-contrib"
-"xmobar"
+"lightdm lightdm-webkit2-greeter lightdm-webkit-theme-litarvan"
+"qtile"
 "dmenu"
-"picom"
+"rofi"
 "nitrogen"
 "firefox"
 "ntfs-3g"
@@ -96,8 +92,14 @@ PKGS=(
 "git"
 "gvim"
 "xdg-users-dirs"
-"zsh-syntax-highlighting"
-"zsh-autosuggestions"
+"arandr"
+"bat"
+"lsd"
+"kvantum-qt5"
+"lxappearance"
+"numlockx"
+"reflector"
+"ttf-roboto"
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -132,8 +134,9 @@ fi
 
 # detect virtualbox
 pacman -S dmidecode --noconfirm
-if [[ $(dmidecode -t system | grep 'Product Name') =~ "VirtualBox" ]]; then
-pacman -S virtualbox-guest-utils --noconfirm
+VM=$(dmidecode -t system | grep 'Product Name')
+if [[ $VM =~ "VirtualBox" ]]; then
+	pacman -S virtualbox-guest-utils --noconfirm
 fi
 
 echo -e "\nDone!\n"
