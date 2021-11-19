@@ -102,6 +102,7 @@ PKGS=(
 "numlockx"
 "reflector"
 "ttf-roboto"
+"breeze-gtk"
 )
 
 for PKG in "${PKGS[@]}"; do
