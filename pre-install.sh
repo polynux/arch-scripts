@@ -115,7 +115,8 @@ timedatectl set-ntp true
 sed -i 's/^#Para/Para/' /etc/pacman.conf # enable parallels download
 
 # Install base
-pacstrap /mnt base base-devel linux linux-firmware gvim nano sudo archlinux-keyring wget btrfs-progs e2fsprogs dosfstools --noconfirm --needed
+pacstrap /mnt base base-devel linux linux-firmware nano sudo \
+    archlinux-keyring wget btrfs-progs e2fsprogs dosfstools --noconfirm --needed
 genfstab -U /mnt >> /mnt/etc/fstab
 
 cp -R $(pwd) /mnt/root/
