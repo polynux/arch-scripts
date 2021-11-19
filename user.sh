@@ -21,7 +21,6 @@ cd ${HOME}/yay
 makepkg -si --noconfirm
 
 PKGS=(
-"sddm-nordic-theme-git"
 "nerd-fonts-fira-code"
 "papirus-icon-theme"
 "brave-bin"
