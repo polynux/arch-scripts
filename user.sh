@@ -24,6 +24,10 @@ PKGS=(
 "sddm-nordic-theme-git"
 "nerd-fonts-fira-code"
 "papirus-icon-theme"
+"brave-bin"
+"kvantum-theme-layan-git"
+"nerd-fonts-fira-code"
+"picom-ibhagwan-git"
 )
 
 for PKG in "${PKGS[@]}"; do
