@@ -113,6 +113,7 @@ echo "--------------------------------------"
 
 timedatectl set-ntp true
 sed -i 's/^#Para/Para/' /etc/pacman.conf # enable parallels download
+sed -i 's/^#Color/Color/' /etc/pacman.conf # enable colors
 
 # Install base
 pacstrap /mnt base base-devel linux linux-firmware nano sudo \
