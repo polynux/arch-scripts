@@ -74,7 +74,7 @@ sgdisk -n 2::$SIZE --typecode=2:8304 --change-name=2:"root" $DISK # root partiti
 sgdisk -n 3::-0 --typecode=3:8302 --change-name=3:"home" $DISK # home partition
 
 # Format home partition
-mkfs.ext4 -n "home" "${DISK}3"
+mkfs.ext4 -L "home" "${DISK}3"
 ;;
 
 y|yes|YES|Yes|Y)
