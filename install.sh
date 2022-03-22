@@ -46,7 +46,7 @@ localectl --no-ask-password set-locale LANG="fr_FR.UTF-8" LC_TIME="fr_FR.UTF-8"
 localectl --no-ask-password set-keymap fr
 
 # Add sudo no password rights
-sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
 
 #Add parallel downloading
 sed -i 's/^#Para/Para/' /etc/pacman.conf
