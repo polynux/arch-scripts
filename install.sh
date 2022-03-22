@@ -74,6 +74,7 @@ PKGS=(
 "lightdm-webkit2-greeter"
 "lightdm-webkit-theme-litarvan"
 "qtile"
+"awesome"
 "dmenu"
 "rofi"
 "nitrogen"
