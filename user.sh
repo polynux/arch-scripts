@@ -35,10 +35,7 @@ for PKG in "${PKGS[@]}"; do
     yay -S --noconfirm $PKG
 done
 
-# some dotfile stuff
-#
-#
-#
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply polynux
 
 echo -e "\nDone!\n"
 exit

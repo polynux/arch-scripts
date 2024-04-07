@@ -115,6 +115,9 @@ timedatectl set-ntp true
 sed -i 's/^#Para/Para/' /etc/pacman.conf # enable parallels download
 sed -i 's/^#Color/Color/' /etc/pacman.conf # enable colors
 
+pacman -S reflector --noconfirm --needed
+reflector --country France,Belgium --latest 10 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
 # Install base
 pacstrap /mnt base base-devel linux linux-firmware nano sudo \
     archlinux-keyring wget btrfs-progs e2fsprogs dosfstools --noconfirm --needed

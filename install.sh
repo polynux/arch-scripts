@@ -81,6 +81,7 @@ PKGS=(
 "firefox"
 "ntfs-3g"
 "zsh"
+"fish"
 "xterm"
 "terminator"
 "pcmanfm"
@@ -98,12 +99,25 @@ PKGS=(
 "arandr"
 "bat"
 "lsd"
+"ripgrep"
+"fzf"
 "kvantum-qt5"
 "lxappearance"
 "numlockx"
 "reflector"
 "ttf-roboto"
 "breeze-gtk"
+"gnome"
+"gnome-extras"
+"wezterm"
+"fish"
+"ttf-cascadia-mono-nerd"
+"ttf-cascadia-code-nerd"
+"php"
+"tig"
+"rust"
+"starship"
+"bob"
 )
 
 for PKG in "${PKGS[@]}"; do
@@ -144,9 +158,6 @@ if [[ $VM =~ "VirtualBox" ]]; then
 fi
 
 echo -e "\nDone!\n"
-
-echo "Enter root password:"
-passwd
 
 read -p "Please enter username:" username
 echo "username=$username" >> ${HOME}/arch-scripts/install.conf
