@@ -70,9 +70,6 @@ PKGS=(
 "os-prober"
 "mtools"
 "linux-headers"
-"lightdm"
-"lightdm-webkit2-greeter"
-"lightdm-webkit-theme-litarvan"
 "qtile"
 "awesome"
 "dmenu"
@@ -109,21 +106,25 @@ PKGS=(
 "breeze-gtk"
 "gnome"
 "gnome-extras"
+"gnome-tweaks"
 "wezterm"
 "fish"
 "ttf-cascadia-mono-nerd"
 "ttf-cascadia-code-nerd"
 "php"
+"phpactor"
 "tig"
 "rust"
 "starship"
 "bob"
+"lua"
+"luarocks"
+"luajit"
+"zoxide"
+"tmux"
 )
 
-for PKG in "${PKGS[@]}"; do
-    echo "INSTALLING: ${PKG}"
-    sudo pacman -S "$PKG" --noconfirm --needed
-done
+pacman -S "${PKGS[@]}" --noconfirm --needed
 
 # determine processor type and install microcode
 proc_type=$(lscpu | awk '/Vendor ID:/ {print $3}')

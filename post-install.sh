@@ -25,6 +25,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # sed -i "s,#greeter-setup-script=,greeter-setup-script=/usr/bin/numlockx on,g" /etc/lightdm/lightdm.conf
 # sed -i "s,antergos,litarvan,g" /etc/lightdm/lightdm-webkit2-greeter.conf
 
+systemctl enable sddm.service
+
 echo -e "\nEnabling essential services"
 systemctl enable NetworkManager.service
 

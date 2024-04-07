@@ -31,11 +31,22 @@ PKGS=(
 "breeze-default-cursor-theme"
 )
 
-for PKG in "${PKGS[@]}"; do
-    yay -S --noconfirm $PKG
-done
+yay -Sy archlinux-keyring --noconfirm
+
+yay -S --noconfirm "${PKGS[@]}"
 
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply polynux
+
+bob install latest
+bob use latest
+
+source ~/.asdf/asdf.sh
+asdf plugin list all
+asdf plugin add nodejs
+asdf list all nodejs
+LTS=$(asdf nodejs resolve lts --latest-available)
+asdf install nodejs $LTS
+asdf global nodejs $LTS
 
 echo -e "\nDone!\n"
 exit
